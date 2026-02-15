@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><style>*:focus { outline: none; }</style><style>*:focus { outline: none; }</style><style>*:focus { outline: none; }</style><style>*:focus { outline: none; }</style><style>*:focus { outline: none; }</style><style>*:focus { outline: none; }</style></head><body contenteditable="true" spellcheck="false"><yb_canvas uuid="571290de-27a0-beef-4cf6-4e73bd772a66" mversion="11" type="code" subtype="single">
+
+<filename>insurance_vs_deposit_comparison_with_advice.html</filename>
+
+<yb_code lang="html">
+
+
+
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>趸交保险与定期存款收益对比</title>
+
+<style>
+
+• {
+
+margin: 0;
+
+padding: 0;
+
+box-sizing: border-box;
+
+font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+
+}
+
+body {
+
+background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+
+min-height: 100vh;
+
+padding: 20px;
+
+}.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.header {
+    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.content {
+    padding: 30px;
+}
+
+.comparison-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.comparison-column {
+    background: #f9f9f9;
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid #e0e0e0;
+}
+
+.column-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid;
+}
+
+.insurance-header {
+    border-bottom-color: #2196F3;
+}
+
+.deposit-header {
+    border-bottom-color: #FF9800;
+}
+
+.column-header h2 {
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+}
+
+.column-header .subtitle {
+    font-size: 13px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    color: #333;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding-left: 5px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.3s;
+    background: white;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.form-input:disabled {
+    background: #f5f5f5;
+    color: #999;
+}
+
+.form-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.3s;
+    background: white;
+    cursor: pointer;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.form-hint {
+    font-size: 12px;
+    color: #666;
+    margin-top: 6px;
+    padding-left: 5px;
+}
+
+.result-box {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    color: white;
+    text-align: center;
+}
+
+.result-label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.result-value {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 8px 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.result-unit {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.interim-result {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    border-radius: 12px;
+    padding: 18px;
+    margin: 20px 0;
+    color: white;
+    text-align: center;
+}
+
+.button-container {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.btn-calculate {
+    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-calculate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(156, 39, 176, 0.3);
+}
+
+.btn-calculate:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.comparison-result {
+    background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 30px;
+    color: white;
+}
+
+.comparison-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.comparison-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+}
+
+.comparison-label {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+
+.comparison-amount {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.comparison-diff {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.diff-positive {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+}
+
+.diff-negative {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+}
+
+.winner {
+    border: 3px solid #FFD700;
+}
+
+.winner-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFD700;
+    color: #333;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.estimate-red {
+    color: #f44336;
+    font-weight: 700;
+}
+
+.hidden {
+    display: none;
+}
+
+.amount-yuan {
+    font-size: 20px;
+    color: #FFD700;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.auto-calc-hint {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background: #f0f7ff;
+    border-radius: 8px;
+    border-left: 3px solid #2196F3;
+}
+
+.comparison-hidden {
+    display: none;
+}
+
+.comparison-visible {
+    display: block;
+}
+
+.winner-text {
+    font-size: 22px;
+    font-weight: 700;
+    color: #FFD700;
+    margin: 10px 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.winner-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.insurance-winner {
+    background: rgba(33, 150, 243, 0.2);
+}
+
+.deposit-winner {
+    background: rgba(255, 152, 0, 0.2);
+}
+
+.advice-section {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.advice-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #FFD700;
+    margin-bottom: 8px;
+}
+
+.advice-content {
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.insurance-advice {
+    border-left: 3px solid #2196F3;
+}
+
+.deposit-advice {
+    border-left: 3px solid #FF9800;
+}
+
+.disclaimer {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 10px;
+    font-style: italic;
+}
+
+@media (max-width: 900px) {
+    .comparison-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding: 20px;
+    }
+    
+    .comparison-column {
+        padding: 20px;
+    }
+    
+    .result-value {
+        font-size: 24px;
+    }
+    
+    .comparison-amount {
+        font-size: 20px;
+    }
+    
+    .comparison-diff {
+        font-size: 16px;
+    }
+    
+    .amount-yuan {
+        font-size: 18px;
+    }
+    
+    .winner-text {
+        font-size: 20px;
+    }
+    
+    .advice-content {
+        font-size: 11px;
+    }
+}
+</style>
+
+
+
+
+<div class="container">
+
+<div class="header">
+
+趸交保险与定期存款收益对比
+
+六年期投资方案对比分析
+
+</div> <div class="content">
+    <div class="auto-calc-hint">
+        💡 提示：保险和存款收益实时计算，修改参数后点击"开始对比计算"查看对比结果
+    </div>
+    
+    <div class="comparison-container">
+        <!-- 左边：趸交保险计算器 -->
+        <div class="comparison-column">
+            <div class="column-header insurance-header">
+                <h2>太保保利盈(2025)两全保险</h2>
+                <div class="subtitle">六年期趸交保险收益计算</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">1. 投保年龄（周岁）</label>
+                <input type="number" id="insuranceAge" class="form-input" min="0" max="70" placeholder="请输入0-70周岁之间的年龄">
+                <div class="form-hint">请输入0-70周岁之间的年龄</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">2. 投保金额（万元）</label>
+                <input type="number" id="insuranceAmount" class="form-input" step="0.1" min="0.1" placeholder="请输入投保金额，如10">
+                <div class="form-hint">投保金额（万元），修改此金额存款金额将同步</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">3. 保险期限</label>
+                <input type="text" class="form-input" value="6年" disabled="">
+            </div>
+            
+            <div class="result-box" id="insuranceResult">
+                <div class="result-label">到期领取金额</div>
+                <div class="result-value" id="insuranceMaturityAmount">33.18</div>
+                <div class="result-unit">万元</div>
+            </div>
+        </div>
+        
+        <!-- 右边：定期存款计算器 -->
+        <div class="comparison-column">
+            <div class="column-header deposit-header">
+                <h2>定期存款</h2>
+                <div class="subtitle">六年期定期存款收益计算</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">1. 存款金额（万元）</label>
+                <input type="number" id="depositAmount" class="form-input" min="0.1" step="0.1" placeholder="请输入存款金额，如10">
+                <div class="form-hint">存款金额（万元），修改此金额投保金额将同步</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">2. 第一个三年定期利率</label>
+                <select id="firstRate" class="form-select">
+                    <option value="" selected="" disabled="">请选择利率</option>
+                    <option value="0.0175">1.75%</option>
+                    <option value="0.0165">1.65%</option>
+                    <option value="0.0155">1.55%</option>
+                    <option value="0.0145">1.45%</option>
+                </select>
+                <div class="form-hint">请选择第一个三年的定期存款利率</div>
+            </div>
+            
+            <div class="interim-result">
+                <div class="result-label">第一个三年到期本息金额</div>
+                <div class="result-value" id="firstTermAmount">31.57</div>
+                <div class="result-unit">万元</div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">3. <span class="estimate-red">预估</span>第二个三年定期利率</label>
+                <select id="secondRate" class="form-select">
+                    <option value="" selected="" disabled="">请选择利率</option>
+                    <option value="0.0175">1.75%</option>
+                    <option value="0.0155">1.55%</option>
+                    <option value="0.0135">1.35%</option>
+                    <option value="0.0115">1.15%</option>
+                    <option value="0.0105">1.05%</option>
+                </select>
+                <div class="form-hint">请<span class="estimate-red">预估</span>第二个三年的定期存款利率</div>
+            </div>
+            
+            <div class="result-box" id="depositResult">
+                <div class="result-label">六年到期总金额</div>
+                <div class="result-value" id="depositMaturityAmount">32.84</div>
+                <div class="result-unit">万元</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="button-container">
+        <button class="btn-calculate" id="compareButton" onclick="showComparison()">开始对比计算</button>
+    </div>
+    
+    <div class="comparison-result comparison-hidden" id="comparisonSection">
+        <div class="comparison-title">收益对比结果</div>
+        <div class="comparison-grid" id="comparisonGrid">
+            <div class="comparison-item winner insurance-winner">
+                <div class="winner-badge">胜出方案</div>
+                <div class="winner-icon">🏆</div>
+                <div class="winner-text">保险胜出</div>
+                <div class="comparison-label">太保保利盈(2025)两全保险</div>
+            </div>
+            
+            <div class="comparison-item">
+                <div class="comparison-label">胜出金额</div>
+                <div class="comparison-amount">比存款多900 元</div>
+               
+            </div>
+            
+            <div class="advice-section insurance-advice">
+                <div class="advice-title">投资建议</div>
+                <div class="advice-content">
+                    六年期保险收益高，同时锁定收益，避免利率下行风险。仅供参考，具体金额以产品条款和合同金额为准。
+                </div>
+                <div class="disclaimer">*保险具有保障功能，收益确定，不受利率波动影响</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+// 保险金额表数据
+const ageToAmountMap = {
+    0: 1107, 1: 1107, 2: 1107, 3: 1107, 4: 1107, 5: 1107, 6: 1107, 7: 1107, 8: 1107, 9: 1107,
+    10: 1107, 11: 1107, 12: 1107, 13: 1107, 14: 1107, 15: 1107, 16: 1107, 17: 1106, 18: 1106, 19: 1106,
+    20: 1106, 21: 1106, 22: 1106, 23: 1106, 24: 1106, 25: 1106, 26: 1106, 27: 1106, 28: 1106, 29: 1106,
+    30: 1106, 31: 1105, 32: 1105, 33: 1105, 34: 1105, 35: 1105, 36: 1105, 37: 1105, 38: 1105, 39: 1105,
+    40: 1105, 41: 1105, 42: 1104, 43: 1104, 44: 1104, 45: 1104, 46: 1103, 47: 1103, 48: 1103, 49: 1102,
+    50: 1102, 51: 1102, 52: 1101, 53: 1101, 54: 1100, 55: 1099, 56: 1100, 57: 1100, 58: 1100, 59: 1101,
+    60: 1101, 61: 1102, 62: 1101, 63: 1101, 64: 1100, 65: 1099, 66: 1098, 67: 1097, 68: 1096, 69: 1094,
+    70: 1092
+};
+
+// 截断小数，不四舍五入
+function truncateDecimal(num, decimalPlaces) {
+    const factor = Math.pow(10, decimalPlaces);
+    return Math.floor(num * factor) / factor;
+}
+
+// 计算保险到期金额
+function calculateInsuranceMaturity(age, amount) {
+    if (!age || !amount) return 0;
+    
+    const baseAmount = ageToAmountMap[age];
+    if (!baseAmount) {
+        return 0;
+    }
+    
+    const maturityAmount = amount * baseAmount / 1000;
+    return truncateDecimal(maturityAmount, 2);
+}
+
+// 计算存款第一个三年到期本息金额
+function calculateFirstTermDeposit(amount, firstRate) {
+    if (!amount || !firstRate) return 0;
+    
+    const firstTermAmount = amount * (1 + firstRate * 3);
+    return truncateDecimal(firstTermAmount, 2);
+}
+
+// 计算存款六年到期总金额
+function calculateDepositMaturity(firstTermAmount, secondRate) {
+    if (!firstTermAmount || !secondRate) return 0;
+    
+    const finalAmount = firstTermAmount * (1 + secondRate * 3);
+    return truncateDecimal(finalAmount, 2);
+}
+
+// 金额联动：保险金额变化时同步存款金额
+function syncDepositAmount() {
+    const insuranceAmount = document.getElementById('insuranceAmount').value;
+    document.getElementById('depositAmount').value = insuranceAmount;
+}
+
+// 金额联动：存款金额变化时同步保险金额
+function syncInsuranceAmount() {
+    const depositAmount = document.getElementById('depositAmount').value;
+    document.getElementById('insuranceAmount').value = depositAmount;
+}
+
+// 检查输入是否有效
+function checkInputsValid() {
+    const insuranceAge = parseInt(document.getElementById('insuranceAge').value);
+    const insuranceAmount = parseFloat(document.getElementById('insuranceAmount').value);
+    const depositAmount = parseFloat(document.getElementById('depositAmount').value);
+    const firstRate = parseFloat(document.getElementById('firstRate').value);
+    const secondRate = parseFloat(document.getElementById('secondRate').value);
+    
+    return !isNaN(insuranceAge) && insuranceAge >= 0 && insuranceAge <= 70 && 
+           !isNaN(insuranceAmount) && insuranceAmount > 0 &&
+           !isNaN(depositAmount) && depositAmount > 0 &&
+           !isNaN(firstRate) && !isNaN(secondRate);
+}
+
+// 更新计算按钮状态
+function updateCompareButton() {
+    const compareButton = document.getElementById('compareButton');
+    compareButton.disabled = !checkInputsValid();
+}
+
+// 执行实时计算
+function calculateAll() {
+    // 获取保险计算参数
+    const insuranceAgeInput = document.getElementById('insuranceAge');
+    const insuranceAmountInput = document.getElementById('insuranceAmount');
+    
+    const insuranceAge = parseInt(insuranceAgeInput.value);
+    const insuranceAmount = parseFloat(insuranceAmountInput.value);
+    
+    // 获取存款计算参数
+    const depositAmountInput = document.getElementById('depositAmount');
+    const firstRateSelect = document.getElementById('firstRate');
+    const secondRateSelect = document.getElementById('secondRate');
+    
+    const depositAmount = parseFloat(depositAmountInput.value);
+    const firstRate = parseFloat(firstRateSelect.value);
+    const secondRate = parseFloat(secondRateSelect.value);
+    
+    // 计算保险到期金额
+    let insuranceMaturity = 0;
+    if (!isNaN(insuranceAge) && insuranceAge >= 0 && insuranceAge <= 70 && 
+        !isNaN(insuranceAmount) && insuranceAmount > 0) {
+        insuranceMaturity = calculateInsuranceMaturity(insuranceAge, insuranceAmount);
+    }
+    
+    // 更新保险到期金额显示
+    document.getElementById('insuranceMaturityAmount').textContent = insuranceMaturity.toFixed(2);
+    
+    // 计算存款到期金额
+    let firstTermAmount = 0;
+    let depositMaturity = 0;
+    
+    if (!isNaN(depositAmount) && depositAmount > 0) {
+        if (!isNaN(firstRate)) {
+            firstTermAmount = calculateFirstTermDeposit(depositAmount, firstRate);
+        }
+        
+        if (!isNaN(firstRate) && !isNaN(secondRate)) {
+            depositMaturity = calculateDepositMaturity(firstTermAmount, secondRate);
+        }
+    }
+    
+    // 更新存款到期金额显示
+    document.getElementById('firstTermAmount').textContent = firstTermAmount.toFixed(2);
+    document.getElementById('depositMaturityAmount').textContent = depositMaturity.toFixed(2);
+    
+    // 更新计算按钮状态
+    updateCompareButton();
+    
+    // 隐藏对比区域
+    hideComparison();
+}
+
+// 隐藏对比区域
+function hideComparison() {
+    document.getElementById('comparisonSection').classList.remove('comparison-visible');
+    document.getElementById('comparisonSection').classList.add('comparison-hidden');
+}
+
+// 显示对比结果
+function showComparison() {
+    if (!checkInputsValid()) {
+        alert('请输入完整的有效参数后再进行对比计算');
+        return;
+    }
+    
+    // 获取实时计算结果
+    const insuranceMaturity = parseFloat(document.getElementById('insuranceMaturityAmount').textContent);
+    const depositMaturity = parseFloat(document.getElementById('depositMaturityAmount').textContent);
+    
+    // 计算差额
+    const amountDiff = truncateDecimal(insuranceMaturity - depositMaturity, 2);
+    const amountDiffYuan = truncateDecimal(amountDiff * 10000, 0);
+    
+    // 确定胜出方案
+    const insuranceWins = amountDiff > 0;
+    const isTie = amountDiff === 0;
+    
+    const comparisonGrid = document.getElementById('comparisonGrid');
+    
+    // 新的对比布局：先显示谁胜出，再显示胜出金额，最后添加建议
+    if (isTie) {
+        // 平局情况
+        comparisonGrid.innerHTML = `
+            <div class="comparison-item winner">
+                <div class="winner-badge">平局</div>
+                <div class="winner-icon">🤝</div>
+                <div class="winner-text">收益相同</div>
+                <div class="comparison-label">保险与存款收益完全相等</div>
+            </div>
+            
+            <div class="comparison-item">
+                <div class="comparison-label">差额金额</div>
+                <div class="comparison-amount">0 元</div>
+                <div class="comparison-label">两种方案收益相同</div>
+            </div>
+            
+            <div class="advice-section">
+                <div class="advice-title">投资建议</div>
+                <div class="advice-content">
+                    两种方案收益相同，建议根据个人需求选择：保险提供保障功能，存款流动性更好。
+                </div>
+                <div class="disclaimer">*具体金额以产品条款和合同金额为准</div>
+            </div>
+        `;
+    } else if (insuranceWins) {
+        // 保险胜出
+        comparisonGrid.innerHTML = `
+            <div class="comparison-item winner insurance-winner">
+                <div class="winner-badge">胜出方案</div>
+                <div class="winner-icon">🏆</div>
+                <div class="winner-text">保险胜出</div>
+                <div class="comparison-label">太保保利盈(2025)两全保险</div>
+            </div>
+            
+            <div class="comparison-item">
+                <div class="comparison-label">胜出金额</div>
+                <div class="comparison-amount">比存款多${amountDiffYuan.toLocaleString('zh-CN')} 元</div>
+               
+            </div>
+            
+            <div class="advice-section insurance-advice">
+                <div class="advice-title">投资建议</div>
+                <div class="advice-content">
+                    六年期保险收益高，同时锁定收益，避免利率下行风险。仅供参考，具体金额以产品条款和合同金额为准。
+                </div>
+                <div class="disclaimer">*保险具有保障功能，收益确定，不受利率波动影响</div>
+            </div>
+        `;
+    } else {
+        // 存款胜出
+        comparisonGrid.innerHTML = `
+            <div class="comparison-item winner deposit-winner">
+                <div class="winner-badge">胜出方案</div>
+                <div class="winner-icon">🏆</div>
+                <div class="winner-text">存款胜出</div>
+                <div class="comparison-label">定期存款方案</div>
+            </div>
+            
+            <div class="comparison-item">
+                <div class="comparison-label">胜出金额</div>
+             
+                <div class="comparison-diff diff-negative">
+                    比保险多 ${Math.abs(amountDiff).toFixed(2)*10000} 元
+                </div>
+            </div>
+            
+            <div class="advice-section deposit-advice">
+                <div class="advice-title">投资建议</div>
+                <div class="advice-content">
+                    当前利率条件下存款略高，但保险具备保障与收益锁定优势。仅供参考，具体金额以产品条款和合同金额为准。
+                </div>
+                <div class="disclaimer">*存款流动性较好，但收益受利率波动影响</div>
+            </div>
+        `;
+    }
+    
+    document.getElementById('comparisonSection').classList.remove('comparison-hidden');
+    document.getElementById('comparisonSection').classList.add('comparison-visible');
+}
+
+// 页面加载初始化
+document.addEventListener('DOMContentLoaded', function() {
+    // 设置事件监听
+    document.getElementById('insuranceAge').addEventListener('input', function() {
+        calculateAll();
+    });
+    
+    document.getElementById('insuranceAmount').addEventListener('input', function() {
+        syncDepositAmount();
+        calculateAll();
+    });
+    
+    document.getElementById('depositAmount').addEventListener('input', function() {
+        syncInsuranceAmount();
+        calculateAll();
+    });
+    
+    document.getElementById('firstRate').addEventListener('change', function() {
+        calculateAll();
+    });
+    
+    document.getElementById('secondRate').addEventListener('change', function() {
+        calculateAll();
+    });
+    
+    // 初始状态设置
+    calculateAll();
+});
+</script>
+
+
+</yb_code></yb_canvas></body></html>

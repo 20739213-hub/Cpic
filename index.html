@@ -1,0 +1,374 @@
+<yb_canvas uuid="571290de-27a0-beef-4cf6-4e73bd772a66" mversion="14" type="code" subtype="single">
+
+<filename>index.html</filename>
+
+<yb_code lang="html"><!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>2026年保险理财计算器</title>
+
+<style>
+
+• {
+
+margin: 0;
+
+padding: 0;
+
+box-sizing: border-box;
+
+font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+
+}
+
+body {
+
+background: linear-gradient(135deg, #8b0000 0%, #b22222 100%);
+
+min-height: 100vh;
+
+padding: 20px;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+}/* 简洁的新年装饰 */
+.new-year-decoration {
+    position: fixed;
+    z-index: 1;
+    font-size: 24px;
+    opacity: 0.2;
+}
+
+.decoration-1 {
+    top: 10%;
+    left: 5%;
+}
+
+.decoration-2 {
+    top: 15%;
+    right: 5%;
+}
+
+.decoration-3 {
+    bottom: 20%;
+    left: 8%;
+}
+
+.decoration-4 {
+    bottom: 15%;
+    right: 8%;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 900px;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+
+.header {
+    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    color: #ffd700;
+    padding: 30px 25px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0 #8b0000;
+}
+
+.header p {
+    font-size: 16px;
+    color: white;
+    opacity: 0.9;
+}
+
+.content {
+    padding: 40px 30px;
+}
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.welcome-title {
+    font-size: 24px;
+    color: #8b0000;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.welcome-text {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.module-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    text-align: center;
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: #ff0000;
+}
+
+.module-icon {
+    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    color: #ffd700;
+    padding: 25px;
+    font-size: 40px;
+}
+
+.module-content {
+    padding: 25px;
+}
+
+.module-title {
+    font-size: 20px;
+    color: #8b0000;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.module-desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.btn-access {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.btn-access:hover {
+    background: white;
+    color: #ff0000;
+    border-color: #ff0000;
+    transform: scale(1.05);
+}
+
+.features-section {
+    background: #fff5f5;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+.features-title {
+    font-size: 20px;
+    color: #8b0000;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 15px;
+}
+
+.feature-icon {
+    font-size: 24px;
+    color: #ff0000;
+    margin-bottom: 10px;
+}
+
+.feature-text {
+    font-size: 14px;
+    color: #666;
+}
+
+.footer {
+    background: #8b0000;
+    color: #ffd700;
+    padding: 20px;
+    text-align: center;
+    border-top: 3px solid #ffd700;
+}
+
+.footer-text {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.new-year-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .modules-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header h1 {
+        font-size: 24px;
+    }
+    
+    .welcome-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding: 30px 20px;
+    }
+    
+    .header {
+        padding: 25px 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="new-year-decoration decoration-1">🎉</div>
+
+<div class="new-year-decoration decoration-2">💰</div>
+
+<div class="new-year-decoration decoration-3">📈</div>
+
+<div class="new-year-decoration decoration-4">⚖️</div> <div class="container">
+    <div class="header">
+        <h1>2026年保险理财计算器</h1>
+        <p>新年新规划，财富稳增长</p>
+    </div>
+    
+    <div class="content">
+        <div class="welcome-message">
+            <h2 class="welcome-title">欢迎使用保险理财计算工具</h2>
+            <p class="welcome-text">科学计算，明智决策。我们的计算器帮助您清晰了解不同理财方案的收益情况，为您的财富规划提供数据支持。</p>
+        </div>
+        
+        <div class="modules-grid">
+            <!-- 保险计算器 -->
+            <div class="module-card">
+                <div class="module-icon">📈</div>
+                <div class="module-content">
+                    <h3 class="module-title">趸交保险计算器</h3>
+                    <p class="module-desc">计算太保保利盈(2025)两全保险的六年期到期收益，根据投保年龄和金额自动计算。</p>
+                    <a href="BX.html" class="btn-access">进入计算器</a>
+                </div>
+            </div>
+            
+            <!-- 收益对比器 -->
+            <div class="module-card">
+                <div class="module-icon">⚖️</div>
+                <div class="module-content">
+                    <h3 class="module-title">保险与存款收益对比</h3>
+                    <p class="module-desc">对比趸交保险与定期存款的六年期收益，实时计算差额，提供投资建议。</p>
+                    <a href="BVSC.html" class="btn-access">进入对比器</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features-section">
+            <h3 class="features-title">核心功能特点</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-text">精准计算</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">实时更新</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">数据对比</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💡</div>
+                    <div class="feature-text">投资建议</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p class="footer-text">保险理财计算器 © 2026 新年特供版</p>
+        <p class="footer-text">本工具仅供参考，实际收益以产品合同为准</p>
+        <p class="new-year-text">恭祝2026年新年快乐，财源广进！</p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('2026年保险理财计算器已加载');
+        
+        // 为模块卡片添加点击效果
+        const cards = document.querySelectorAll('.module-card');
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'translateY(-8px)';
+                
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-5px)';
+                }, 300);
+            });
+        });
+    });
+</script>
+</body>
+
+</html>
