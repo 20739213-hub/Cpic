@@ -1,243 +1,153 @@
-<yb_canvas uuid="f3a8b7c2-4d9e-4f5a-9c12-123456789012" mversion="2" type="code" subtype="single">
-
-<title>太保保利盈(2025)两全保险收益计算器</title>
-
-<filename>insurance_calculator.html</filename>
-
-<yb_code lang="html"><!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>太保保利盈(2025)两全保险收益计算器</title>
 
 <style>
-
-• {
-
-margin: 0;
-
-padding: 0;
-
-box-sizing: border-box;
-
-font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, "Microsoft YaHei", sans-serif;
 }
 
-body {
-
-background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-
-min-height: 100vh;
-
-padding: 20px;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-}.container {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    width: 100%;
-    max-width: 600px;
-    overflow: hidden;
+body{
+    background:#f4f6f9;
+    padding:15px;
 }
 
-.header {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-    color: white;
-    padding: 25px;
-    text-align: center;
+/* 主容器 */
+.container{
+    max-width:600px;
+    margin:0 auto;
+    background:#ffffff;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    overflow:hidden;
 }
 
-.header h1 {
-    font-size: 22px;
-    margin-bottom: 5px;
-    font-weight: 600;
+/* 头部 */
+.header{
+    background:#1976D2;
+    color:#fff;
+    padding:20px;
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
 }
 
-.header p {
-    font-size: 14px;
-    opacity: 0.9;
+/* 内容 */
+.content{
+    padding:20px;
 }
 
-.content {
-    padding: 30px;
+.form-group{
+    margin-bottom:20px;
 }
 
-.form-group {
-    margin-bottom: 25px;
+.form-label{
+    font-weight:bold;
+    margin-bottom:8px;
+    display:block;
+    font-size:15px;
 }
 
-.form-label {
-    display: block;
-    color: #333;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    padding-left: 5px;
+.form-input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
 }
 
-.form-input {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    font-size: 16px;
-    transition: all 0.3s;
-    background: #f9f9f9;
+.form-input:disabled{
+    background:#f0f0f0;
 }
 
-.form-input:focus {
-    outline: none;
-    border-color: #2196F3;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+.form-hint{
+    font-size:12px;
+    color:#666;
+    margin-top:6px;
 }
 
-.form-input:disabled {
-    background: #f5f5f5;
-    color: #999;
+/* 结果 */
+.result-box{
+    background:#4CAF50;
+    color:#fff;
+    padding:20px;
+    border-radius:8px;
+    text-align:center;
+    margin:20px 0;
 }
 
-.form-hint {
-    font-size: 13px;
-    color: #666;
-    margin-top: 8px;
-    padding-left: 5px;
+.result-value{
+    font-size:32px;
+    font-weight:bold;
+    margin-top:10px;
 }
 
-.result-section {
-    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
-    border-radius: 15px;
-    padding: 25px;
-    margin: 30px 0;
-    color: white;
-    text-align: center;
+/* 按钮 */
+.button-group{
+    margin-top:15px;
 }
 
-.result-label {
-    font-size: 15px;
-    margin-bottom: 10px;
-    opacity: 0.9;
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    margin-bottom:10px;
+    cursor:pointer;
 }
 
-.result-value {
-    font-size: 48px;
-    font-weight: 700;
-    margin: 10px 0;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+.btn-calc{
+    background:#1976D2;
+    color:#fff;
 }
 
-.result-unit {
-    font-size: 18px;
-    opacity: 0.8;
+.btn-clear{
+    background:#e0e0e0;
 }
 
-.button-group {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
+/* 表格区域（关键修复点） */
+.table-wrapper{
+    overflow-x:auto;
+    margin-top:20px;
 }
 
-.btn {
-    flex: 1;
-    padding: 18px;
-    border: none;
-    border-radius: 12px;
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-align: center;
+table{
+    width:100%;
+    min-width:350px;
+    border-collapse:collapse;
 }
 
-.btn-calculate {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-    color: white;
+th,td{
+    border:1px solid #ddd;
+    padding:8px;
+    text-align:center;
+    font-size:13px;
 }
 
-.btn-calculate:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(33, 150, 243, 0.3);
+th{
+    background:#1976D2;
+    color:#fff;
 }
 
-.btn-clear {
-    background: #f5f5f5;
-    color: #666;
+.highlight{
+    background:#E3F2FD !important;
+    font-weight:bold;
 }
 
-.btn-clear:hover {
-    background: #e0e0e0;
-    transform: translateY(-2px);
-}
-
-.table-container {
-    margin-top: 30px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #e0e0e0;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 12px 15px;
-    text-align: center;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-th {
-    background: #f8f9fa;
-    color: #333;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-td {
-    color: #555;
-    font-size: 14px;
-}
-
-tr:nth-child(even) {
-    background: #f9f9f9;
-}
-
-.highlight {
-    background: #E3F2FD !important;
-    font-weight: 600;
-    color: #1976D2;
-}
-
-@media (max-width: 480px) {
-    .content {
-        padding: 20px;
+/* 手机优化 */
+@media screen and (max-width:480px){
+    .header{
+        font-size:16px;
     }
-    
-    .result-value {
-        font-size: 36px;
-    }
-    
-    .button-group {
-        flex-direction: column;
-    }
-    
-    th, td {
-        padding: 8px 10px;
-        font-size: 12px;
+    .result-value{
+        font-size:26px;
     }
 }
 </style>
@@ -246,251 +156,117 @@ tr:nth-child(even) {
 <body>
 
 <div class="container">
-
 <div class="header">
+太保保利盈(2025)两全保险收益计算器
+</div>
 
-太保保利盈(2025)两全保险
+<div class="content">
 
-基本保险金额计算器
+<div class="form-group">
+<label class="form-label">投保年龄（0-70周岁）</label>
+<input type="number" id="age" class="form-input">
+</div>
 
-</div> <div class="content">
-    <div class="form-group">
-        <label class="form-label">1. 投保年龄（周岁）</label>
-        <input type="number" id="age" class="form-input" min="0" max="70" placeholder="请输入0-70周岁之间的年龄">
-        <div class="form-hint">请输入0-70周岁之间的年龄</div>
-    </div>
-    
-    <div class="form-group">
-        <label class="form-label">2. 投保金额（元）</label>
-        <input type="number" id="amount" class="form-input" step="1000" min="1000" placeholder="请输入投保金额，如100000">
-        <div class="form-hint">必须是1000元的整数倍，如10000元、50000元、100000元</div>
-    </div>
-    
-    <div class="form-group">
-        <label class="form-label">3. 保险期限</label>
-        <input type="text" class="form-input" value="6年" disabled>
-    </div>
-    
-    <div class="form-group">
-        <label class="form-label">4. 每1000元对应基本保险金额</label>
-        <input type="text" id="baseAmount" class="form-input" value="" disabled>
-        <div class="form-hint">根据投保年龄自动查表获得</div>
-    </div>
-    
-    <div class="result-section">
-        <div class="result-label">到期领取金额</div>
-        <div class="result-value" id="result">0</div>
-        <div class="result-unit" id="resultUnit">元</div>
-    </div>
-    
-    <div class="button-group">
-        <button class="btn btn-calculate" onclick="calculate()">计算到期金额</button>
-        <button class="btn btn-clear" onclick="clearInputs()">清空重新计算</button>
-    </div>
-    
-    <div class="form-hint" style="text-align: center; margin-top: 20px; padding: 15px; background: #FFF3E0; border-radius: 8px;">
-        <strong>计算规则：</strong>到期领取金额 = (投保金额 ÷ 1000) × 对应年龄的基本保险金额
-    </div>
-    
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th colspan="2" style="background: #1976D2; color: white;">基本保险金额表（每1000元趸交保险费）</th>
-                </tr>
-                <tr>
-                    <th>投保年龄段</th>
-                    <th>基本保险金额（元）</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                <tr id="range-0-16"><td>0-16岁</td><td>1107</td></tr>
-                <tr id="range-17-30"><td>17-30岁</td><td>1106</td></tr>
-                <tr id="range-31-41"><td>31-41岁</td><td>1105</td></tr>
-                <tr id="range-42-45"><td>42-45岁</td><td>1104</td></tr>
-                <tr id="range-46-48"><td>46-48岁</td><td>1103</td></tr>
-                <tr id="range-49-51"><td>49-51岁</td><td>1102</td></tr>
-                <tr id="range-52-53"><td>52-53岁</td><td>1101</td></tr>
-                <tr id="range-54-54"><td>54岁</td><td>1100</td></tr>
-                <tr id="range-55-55"><td>55岁</td><td>1099</td></tr>
-                <tr id="range-56-58"><td>56-58岁</td><td>1100</td></tr>
-                <tr id="range-59-59"><td>59岁</td><td>1101</td></tr>
-                <tr id="range-60-60"><td>60岁</td><td>1101</td></tr>
-                <tr id="range-61-61"><td>61岁</td><td>1102</td></tr>
-                <tr id="range-62-63"><td>62-63岁</td><td>1101</td></tr>
-                <tr id="range-64-64"><td>64岁</td><td>1100</td></tr>
-                <tr id="range-65-65"><td>65岁</td><td>1099</td></tr>
-                <tr id="range-66-66"><td>66岁</td><td>1098</td></tr>
-                <tr id="range-67-67"><td>67岁</td><td>1097</td></tr>
-                <tr id="range-68-68"><td>68岁</td><td>1096</td></tr>
-                <tr id="range-69-69"><td>69岁</td><td>1094</td></tr>
-                <tr id="range-70-70"><td>70岁</td><td>1092</td></tr>
-            </tbody>
-        </table>
-    </div>
+<div class="form-group">
+<label class="form-label">投保金额（1000的整数倍）</label>
+<input type="number" id="amount" class="form-input">
+</div>
+
+<div class="form-group">
+<label class="form-label">每1000元基本保险金额</label>
+<input type="text" id="baseAmount" class="form-input" disabled>
+</div>
+
+<div class="result-box">
+到期领取金额
+<div class="result-value" id="result">0 元</div>
+</div>
+
+<div class="button-group">
+<button class="btn-calc" onclick="calculate()">计算</button>
+<button class="btn-clear" onclick="clearAll()">清空</button>
+</div>
+
+<div class="table-wrapper">
+<table>
+<tr><th>年龄段</th><th>基本保险金额</th></tr>
+<tr id="r1"><td>0-16</td><td>1107</td></tr>
+<tr id="r2"><td>17-30</td><td>1106</td></tr>
+<tr id="r3"><td>31-41</td><td>1105</td></tr>
+<tr id="r4"><td>42-45</td><td>1104</td></tr>
+<tr id="r5"><td>46-48</td><td>1103</td></tr>
+<tr id="r6"><td>49-51</td><td>1102</td></tr>
+<tr id="r7"><td>52-53</td><td>1101</td></tr>
+<tr id="r8"><td>54</td><td>1100</td></tr>
+<tr id="r9"><td>55</td><td>1099</td></tr>
+<tr id="r10"><td>56-58</td><td>1100</td></tr>
+<tr id="r11"><td>59-60</td><td>1101</td></tr>
+<tr id="r12"><td>61</td><td>1102</td></tr>
+<tr id="r13"><td>62-63</td><td>1101</td></tr>
+<tr id="r14"><td>64</td><td>1100</td></tr>
+<tr id="r15"><td>65</td><td>1099</td></tr>
+<tr id="r16"><td>66</td><td>1098</td></tr>
+<tr id="r17"><td>67</td><td>1097</td></tr>
+<tr id="r18"><td>68</td><td>1096</td></tr>
+<tr id="r19"><td>69</td><td>1094</td></tr>
+<tr id="r20"><td>70</td><td>1092</td></tr>
+</table>
+</div>
+
 </div>
 </div>
 
 <script>
-const ageToAmountMap = {
-    0: 1107, 1: 1107, 2: 1107, 3: 1107, 4: 1107, 5: 1107, 6: 1107, 7: 1107, 8: 1107, 9: 1107,
-    10: 1107, 11: 1107, 12: 1107, 13: 1107, 14: 1107, 15: 1107, 16: 1107, 17: 1106, 18: 1106, 19: 1106,
-    20: 1106, 21: 1106, 22: 1106, 23: 1106, 24: 1106, 25: 1106, 26: 1106, 27: 1106, 28: 1106, 29: 1106,
-    30: 1106, 31: 1105, 32: 1105, 33: 1105, 34: 1105, 35: 1105, 36: 1105, 37: 1105, 38: 1105, 39: 1105,
-    40: 1105, 41: 1105, 42: 1104, 43: 1104, 44: 1104, 45: 1104, 46: 1103, 47: 1103, 48: 1103, 49: 1102,
-    50: 1102, 51: 1102, 52: 1101, 53: 1101, 54: 1100, 55: 1099, 56: 1100, 57: 1100, 58: 1100, 59: 1101,
-    60: 1101, 61: 1102, 62: 1101, 63: 1101, 64: 1100, 65: 1099, 66: 1098, 67: 1097, 68: 1096, 69: 1094,
-    70: 1092
+const rateMap = {
+0:1107,1:1107,2:1107,3:1107,4:1107,5:1107,6:1107,7:1107,8:1107,9:1107,
+10:1107,11:1107,12:1107,13:1107,14:1107,15:1107,16:1107,
+17:1106,18:1106,19:1106,20:1106,21:1106,22:1106,23:1106,24:1106,25:1106,26:1106,27:1106,28:1106,29:1106,30:1106,
+31:1105,32:1105,33:1105,34:1105,35:1105,36:1105,37:1105,38:1105,39:1105,40:1105,41:1105,
+42:1104,43:1104,44:1104,45:1104,
+46:1103,47:1103,48:1103,
+49:1102,50:1102,51:1102,
+52:1101,53:1101,
+54:1100,
+55:1099,
+56:1100,57:1100,58:1100,
+59:1101,60:1101,
+61:1102,
+62:1101,63:1101,
+64:1100,
+65:1099,
+66:1098,
+67:1097,
+68:1096,
+69:1094,
+70:1092
 };
 
-const ageRanges = [
-    { start: 0, end: 16, amount: 1107 },
-    { start: 17, end: 30, amount: 1106 },
-    { start: 31, end: 41, amount: 1105 },
-    { start: 42, end: 45, amount: 1104 },
-    { start: 46, end: 48, amount: 1103 },
-    { start: 49, end: 51, amount: 1102 },
-    { start: 52, end: 53, amount: 1101 },
-    { start: 54, end: 54, amount: 1100 },
-    { start: 55, end: 55, amount: 1099 },
-    { start: 56, end: 58, amount: 1100 },
-    { start: 59, end: 59, amount: 1101 },
-    { start: 60, end: 60, amount: 1101 },
-    { start: 61, end: 61, amount: 1102 },
-    { start: 62, end: 63, amount: 1101 },
-    { start: 64, end: 64, amount: 1100 },
-    { start: 65, end: 65, amount: 1099 },
-    { start: 66, end: 66, amount: 1098 },
-    { start: 67, end: 67, amount: 1097 },
-    { start: 68, end: 68, amount: 1096 },
-    { start: 69, end: 69, amount: 1094 },
-    { start: 70, end: 70, amount: 1092 }
-];
+function calculate(){
+let age=parseInt(document.getElementById("age").value);
+let amount=parseInt(document.getElementById("amount").value);
 
-function findAgeRange(age) {
-    for (const range of ageRanges) {
-        if (age >= range.start && age <= range.end) {
-            return range;
-        }
-    }
-    return null;
+if(isNaN(age)||age<0||age>70){
+alert("请输入0-70之间年龄");
+return;
+}
+if(isNaN(amount)||amount%1000!=0){
+alert("金额必须是1000整数倍");
+return;
 }
 
-function resetResult() {
-    document.getElementById('result').textContent = '0';
-    document.getElementById('resultUnit').textContent = '元';
+let base=rateMap[age];
+document.getElementById("baseAmount").value=base;
+let result=(amount/1000)*base;
+document.getElementById("result").innerText=result.toLocaleString()+" 元";
 }
 
-function calculate() {
-    const ageInput = document.getElementById('age');
-    const amountInput = document.getElementById('amount');
-    const baseAmountInput = document.getElementById('baseAmount');
-    const resultElement = document.getElementById('result');
-    const resultUnitElement = document.getElementById('resultUnit');
-    
-    const age = parseInt(ageInput.value);
-    const amount = parseInt(amountInput.value);
-    
-    if (isNaN(age)) {
-        alert('请输入投保年龄');
-        ageInput.focus();
-        return;
-    }
-    
-    if (age < 0 || age > 70) {
-        alert('请输入0-70周岁之间的有效年龄');
-        ageInput.focus();
-        return;
-    }
-    
-    if (isNaN(amount)) {
-        alert('请输入投保金额');
-        amountInput.focus();
-        return;
-    }
-    
-    if (amount <= 0) {
-        alert('投保金额必须大于0');
-        amountInput.focus();
-        return;
-    }
-    
-    if (amount % 1000 !== 0) {
-        alert('投保金额必须是1000元的整数倍');
-        amountInput.focus();
-        return;
-    }
-    
-    const baseAmount = ageToAmountMap[age];
-    if (!baseAmount) {
-        alert('该年龄不在承保范围内（0-70周岁）');
-        return;
-    }
-    
-    baseAmountInput.value = baseAmount;
-    
-    const maturityAmount = Math.round((amount / 1000) * baseAmount);
-    
-    updateTableHighlight(age);
-    
-    resultElement.textContent = maturityAmount.toLocaleString('zh-CN');
-    resultUnitElement.textContent = '元';
+function clearAll(){
+document.getElementById("age").value="";
+document.getElementById("amount").value="";
+document.getElementById("baseAmount").value="";
+document.getElementById("result").innerText="0 元";
 }
-
-function updateTableHighlight(selectedAge) {
-    const tableRows = document.querySelectorAll('#tableBody tr');
-    tableRows.forEach(row => {
-        row.classList.remove('highlight');
-    });
-    
-    const ageRange = findAgeRange(selectedAge);
-    if (ageRange) {
-        const rowId = `range-${ageRange.start}-${ageRange.end}`;
-        const row = document.getElementById(rowId);
-        if (row) {
-            row.classList.add('highlight');
-        }
-    }
-}
-
-function clearInputs() {
-    document.getElementById('age').value = '';
-    document.getElementById('amount').value = '';
-    document.getElementById('baseAmount').value = '';
-    resetResult();
-    
-    const highlightedRows = document.querySelectorAll('.highlight');
-    highlightedRows.forEach(row => {
-        row.classList.remove('highlight');
-    });
-}
-
-document.getElementById('age').addEventListener('input', function() {
-    const age = parseInt(this.value);
-    const baseAmountInput = document.getElementById('baseAmount');
-    
-    if (!isNaN(age) && age >= 0 && age <= 70) {
-        const baseAmount = ageToAmountMap[age];
-        if (baseAmount) {
-            baseAmountInput.value = baseAmount;
-        } else {
-            baseAmountInput.value = '';
-        }
-    } else {
-        baseAmountInput.value = '';
-    }
-    
-    resetResult();
-});
-
-document.getElementById('amount').addEventListener('input', function() {
-    resetResult();
-});
-
-window.onload = function() {
-    console.log('太保保利盈(2025)两全保险收益计算器已加载');
-};
 </script>
-</body>
 
+</body>
 </html>
